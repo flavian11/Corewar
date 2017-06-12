@@ -1,0 +1,66 @@
+/*
+** vm.h for emcas in /home/leo.colin-vimard/commence_a_regarde_le_corewar/vm
+** 
+** Made by Léo COLIN VIMARD
+** Login   <leo.colin-vimard@epitech.eu>
+** 
+** Started on  Sun Apr  2 03:21:23 2017 Léo COLIN VIMARD
+** Last update Sun Apr  2 04:29:12 2017 Léo COLIN VIMARD
+*/
+
+#ifndef VM_H_
+# define VM_H_
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+
+typedef struct	s_data
+{
+  char		champ_n;
+  char		data;
+  
+}		t_data;
+
+typedef struct	s_champ
+{
+  char		*name;
+  char		*comment;
+  size_t	pos;
+  int		*regs;
+  int		nbr;
+  int		wait;
+  int		alive;
+  
+}		t_champ;
+
+typedef	struct	s_list
+{
+  t_champ	champ;
+  struct s_list	*next;
+  
+}		t_list;
+
+int	*decode_coding_byte(char);
+int	get_value(t_data *arena, size_t, int *, int);
+void    live(t_data *arena, t_list *tmp, t_list *processes);
+void    st(t_data *arena, t_list *tmp, t_list *processes);
+void    ld(t_data *arena, t_list *tmp, t_list *processes);
+void    add(t_data *arena, t_list *tmp, t_list *processes);
+void    sub(t_data *arena, t_list *tmp, t_list *processes);
+void    and(t_data *arena, t_list *tmp, t_list *processes);
+void    or(t_data *arena, t_list *tmp, t_list *processes);
+void    xor(t_data *arena, t_list *tmp, t_list *processes);
+void    zjmp(t_data *arena, t_list *tmp, t_list *processes);
+void    ldi(t_data *arena, t_list *tmp, t_list *processes);
+void    sti(t_data *arena, t_list *tmp, t_list *processes);
+void    fork_i(t_data *arena, t_list *tmp, t_list *processes);
+void    lld(t_data *arena, t_list *tmp, t_list *processes);
+void    lldi(t_data *arena, t_list *tmp, t_list *processes);
+void    lfork(t_data *arena, t_list *tmp, t_list *processes);
+void    aff(t_data *arena, t_list *tmp, t_list *processes);
+
+#endif
